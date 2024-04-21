@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Muhammed Hilmi",
+      "department": "Bilişim",
+      "salary": 3500
+    },
+    {
+      "name": "Sezgin Tunahan",
+      "department": "Bilişim",
+      "salary": 4000
+    },
+    {
+      "name": "Kübra Özyurt",
+      "department": "Pazarlama",
+      "salary": 5000
+    }
+  ]
