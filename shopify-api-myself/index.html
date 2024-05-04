@@ -28,12 +28,10 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Sepetim
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <ul class="dropdown-menu" style="width: 20rem;">                        
+                        <li id="clearCart"><btn class="dropdown-item btn btn-danger bg-danger text-white" onclick="clearCartHandler()" >Sepeti temizle</btn></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><btn class="dropdown-item btn btn-danger bg-danger text-white" id="clearCart">Sepeti temizle</btn></li>
-                    </ul>
+                      </ul>
                 </span>
               </span>
 
@@ -71,6 +69,9 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="d-flex justify-content-center mb-4">
+                  <img src="" id="modalPhoto" class="img-fluid rounded " style="width:15rem; height:20rem">
+                </div>
                 <div id="modalBody"></div>
                 <b id="price"></b>
             </div>

@@ -4,10 +4,10 @@ navList = document.getElementById("navList");
 modal = document.getElementById("exampleModal");
 urll = "https://fakestoreapi.com/products";
 navbarItems = document.getElementById("navbarSupportedContent");
-clearCart = document.getElementById("clearCart");
 cart = document.querySelector(".dropdown-menu");
 
 addToCart = document.getElementById("addToCart");
+clearCart = document.getElementById("clearCart");
 
 
 
@@ -25,29 +25,57 @@ function useEffect(){
     productContainer.addEventListener("click",detayHandler)
     
 
-    clearCart.addEventListener("click",clearCartHandler)
     addToCart.addEventListener("click",addToCartHandler)
+    modal.addEventListener("click",modalHandler)
     
 }
 
 function addToCartHandler(){
-    console.log(modal);
-    if(modal.innerHTML!= ""){
-        cart.innerHTML += `
-        <li><a class="dropdown-item" href="#">${modal.name}</a>
-        <span class="badge badge-primary badge-pill">1</span>
-        </li>
-        `
-    }
-}
+    modalInside = modalHandler()
 
-function clearCartHandler(){
-    if(confirm("Are you sure you want to clear the cart?")) cart.innerHTML = "";
+    if (cart.innerHTML.indexOf(src=modalInside[3]) == -1) {
+        if (modalInside[0]!= ""){
+                cart.innerHTML += `
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3 row">
+                    <img class="p-2 col-4" style="width:5rem;" src="${modalInside[3]}">
+                    <span class="col-4">${modalInside[2]}</span>
+                    <span class=" col-2 badge bg-success rounded-pill">${modalInside[4]}</span>
+                    <btn class="btn btn-danger col-2 badge rounded-pill">X</btn>
+                    <hr class="dropdown-divider">
+                </li>
+                `;
+            }else{
+                cart.innerHTML += `
+                <li><btn class="dropdown-item btn btn-danger bg-danger text-white" id="clearCart" onclick="clearCartHandler()" >Sepeti temizle</btn></li>
+                `;        
+            }
+    }
+    
     
 }
 
-function modalHandler(title, description, price){
-    console.log(title, description, price);
+function clearCartHandler(){
+    console.log(cart.innerHTML, "clearcarthandler");
+    
+    if(confirm("Are you sure you want to clear the cart?")) {
+        cart.innerHTML = `
+        <li><btn class="dropdown-item btn btn-danger bg-danger text-white" id="clearCart" onclick="clearCartHandler()">Sepeti temizle</btn></li>
+        
+        `;
+        // clearCart.addEventListener("click", clearCartHandler);
+    }
+    
+}
+
+function modalHandler(e){
+    title = exampleModalLabel.innerText
+    description = modalBody.innerText
+    price = document.getElementById("price").innerText
+    photoURL = document.getElementById("modalPhoto").src;
+    index = 1;
+
+    return [title, description, price, photoURL, index]
+
 }
 
 function detayHandler(e){
@@ -56,12 +84,13 @@ function detayHandler(e){
         description = e.target.parentElement.parentElement.children[1].innerText;
         price = e.target.parentElement.parentElement.children[2].innerText;
 
+        photoURL = (e.target.parentElement.parentElement.parentElement.firstElementChild.src);
+
         document.getElementById("exampleModalLabel").innerHTML = title;
         document.querySelector("#modalBody").innerHTML = description;
         document.getElementById("price").innerHTML = price;
+        document.getElementById("modalPhoto").src = photoURL;
 
-
-        modalHandler(title, description, price)
     }
     
 }
@@ -70,7 +99,6 @@ function categoryHandler(e){
     data = encodeURI(e.target.id);
     productContainer.innerHTML = "";
     showAllProducts("https://fakestoreapi.com/products/category/"+data)
-    console.log(data, "category");
 
 }
 
